@@ -1,9 +1,24 @@
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
+import { getAllEvents } from '../../dummy-data'
+import EventList from '../../components/event/EventList'
+import EventSearch from '../../components/event/EventSearch'
 
 const AllEventPage: NextPage = () => {
+  const router = useRouter()
+  const events = getAllEvents()
+
+  function onSearch(year: string, month: string) {
+      console.log('year',year,'month',month)
+      const fullPath = `/events/${year}/${month}`
+      router.push(fullPath)
+  }
+
+
   return (
     <div>
-      <h1>All Event</h1>
+      <EventSearch onSearch={onSearch} />
+      <EventList items={events} />
     </div>
   )
 }

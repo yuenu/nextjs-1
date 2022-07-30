@@ -21,6 +21,17 @@ a {
   }
   body {
     color: white;
-    background: black;
+    background: #333;
   }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  margin: auto;
+  text-align: center;
 }

@@ -29,27 +29,36 @@ const DUMMY_EVENTS = [
     image: 'images/extrovert-event.jpg',
     isFeatured: true,
   },
-];
+]
+
+export type DataProp = typeof DUMMY_EVENTS
+export type DataItemProp = DataProp[0]
 
 export function getFeaturedEvents() {
-  return DUMMY_EVENTS.filter((event) => event.isFeatured);
+  return DUMMY_EVENTS.filter((event) => event.isFeatured)
 }
 
 export function getAllEvents() {
-  return DUMMY_EVENTS;
+  return DUMMY_EVENTS
 }
 
-export function getFilteredEvents(dateFilter) {
-  const { year, month } = dateFilter;
+export function getFilteredEvents(dateFilter: {
+  year: number
+  month: number
+}) {
+  const { year, month } = dateFilter
 
   let filteredEvents = DUMMY_EVENTS.filter((event) => {
-    const eventDate = new Date(event.date);
-    return eventDate.getFullYear() === year && eventDate.getMonth() === month - 1;
-  });
+    const eventDate = new Date(event.date)
+    return (
+      eventDate.getFullYear() === year &&
+      eventDate.getMonth() === month - 1
+    )
+  })
 
-  return filteredEvents;
+  return filteredEvents
 }
 
-export function getEventById(id) {
-  return DUMMY_EVENTS.find((event) => event.id === id);
+export function getEventById(id: string | string[] | undefined) {
+  return DUMMY_EVENTS.find((event) => event.id === id)
 }
