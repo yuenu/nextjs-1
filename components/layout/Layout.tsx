@@ -1,15 +1,15 @@
-import MainHeader from "./MainHeader"
+import MainHeader from './MainHeader'
 
 type PropType = {
   children: React.ReactNode
 }
 
-function Layout({children}: PropType) {
+function Layout({ children }: PropType) {
   return (
-   <>
+    <>
       <MainHeader />
       <main>{children}</main>
-   </>
+    </>
   )
 }
 

@@ -12,7 +12,7 @@ const FilterEventsPage: NextPage = () => {
   const filterData = router.query.slug
 
   if (!filterData) {
-    return <p className="center">Loading...</p>
+    return <p className='center'>Loading...</p>
   }
 
   const filteredYear = filterData[0]
@@ -34,8 +34,8 @@ const FilterEventsPage: NextPage = () => {
         <ErrorAlert>
           <p>Invalid filter/ Please adjust your values!</p>
         </ErrorAlert>
-        <div className="center">
-          <Button link="/">Show All Events</Button>
+        <div className='center'>
+          <Button link='/'>Show All Events</Button>
         </div>
       </>
     )
@@ -52,8 +52,8 @@ const FilterEventsPage: NextPage = () => {
         <ErrorAlert>
           <p>No events found for chosen filter!</p>
         </ErrorAlert>
-        <div className="center">
-          <Button link="/">Show All Events</Button>
+        <div className='center'>
+          <Button link='/'>Show All Events</Button>
         </div>
       </>
     )

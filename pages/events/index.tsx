@@ -9,11 +9,10 @@ const AllEventPage: NextPage = () => {
   const events = getAllEvents()
 
   function onSearch(year: string, month: string) {
-      console.log('year',year,'month',month)
-      const fullPath = `/events/${year}/${month}`
-      router.push(fullPath)
+    console.log('year', year, 'month', month)
+    const fullPath = `/events/${year}/${month}`
+    router.push(fullPath)
   }
-
 
   return (
     <div>

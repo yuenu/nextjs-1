@@ -1,4 +1,4 @@
-import classes from './logistics-item.module.css';
+import classes from './logistics-item.module.css'
 
 type PropType = {
   icon: React.ComponentType
@@ -15,7 +15,7 @@ function LogisticsItem({ icon: Icon, children }: PropType) {
       </span>
       <span className={classes.content}>{children}</span>
     </li>
-  );
+  )
 }
 
-export default LogisticsItem;
+export default LogisticsItem

@@ -1,23 +1,30 @@
-import AddressIcon from '../icon/Location';
-import DateIcon from '../icon/Date';
-import LogisticsItem from './logistics-item';
-import classes from './event-logistics.module.css';
+import AddressIcon from '../icon/Location'
+import DateIcon from '../icon/Date'
+import LogisticsItem from './logistics-item'
+import classes from './event-logistics.module.css'
 
-type PropType = { 
-  date: string, 
-  address: string, 
-  image: string, 
-  imageAlt: string 
+type PropType = {
+  date: string
+  address: string
+  image: string
+  imageAlt: string
 }
 
-function EventLogistics({ date, address, image, imageAlt }: PropType) {
-
-  const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-  const addressText = address.replace(', ', '\n');
+function EventLogistics({
+  date,
+  address,
+  image,
+  imageAlt,
+}: PropType) {
+  const humanReadableDate = new Date(date).toLocaleDateString(
+    'en-US',
+    {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }
+  )
+  const addressText = address.replace(', ', '\n')
 
   return (
     <section className={classes.logistics}>
@@ -33,7 +40,7 @@ function EventLogistics({ date, address, image, imageAlt }: PropType) {
         </LogisticsItem>
       </ul>
     </section>
-  );
+  )
 }
 
-export default EventLogistics;
+export default EventLogistics

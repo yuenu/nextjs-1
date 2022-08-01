@@ -1,11 +1,11 @@
-import classes from './ErrorAlert.module.css';
+import classes from './ErrorAlert.module.css'
 
 type PropType = {
   children: React.ReactNode
 }
 
-function ErrorAlert({children}: PropType) {
-  return <div className={classes.alert}>{children}</div>;
+function ErrorAlert({ children }: PropType) {
+  return <div className={classes.alert}>{children}</div>
 }
 
-export default ErrorAlert;
+export default ErrorAlert
