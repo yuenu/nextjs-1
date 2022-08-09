@@ -1,34 +1,37 @@
-import type { NextPage } from 'next'
+import type { NextPage, GetServerSideProps } from 'next'
 import { useRouter } from 'next/router'
-import { getFilteredEvents } from '../../dummy-data'
+import { getFilteredEvents } from '../../helpers/api-utils'
 import EventList from '../../components/event/EventList'
 import ResultsTitle from '../../components/event/ResultsTitle'
 import Button from '../../components/ui/Button'
 import ErrorAlert from '../../components/ui/ErrorAlert'
+import { Response } from '../../types'
 
-const FilterEventsPage: NextPage = () => {
-  const router = useRouter()
-
-  const filterData = router.query.slug
-
-  if (!filterData) {
-    return <p className='center'>Loading...</p>
+type Props = {
+  hasError: boolean
+  events: Response 
+  date: {
+    year: number,
+    month: number
   }
+}
 
-  const filteredYear = filterData[0]
-  const filteredMonth = filterData[1]
+const FilterEventsPage: NextPage<Props> = ({hasError, events, date}) => {
+  // const router = useRouter()
 
-  const numYear = +filteredYear
-  const numMonth = +filteredMonth
-  console.log('numYear', numYear, numMonth, isNaN(numYear))
-  if (
-    isNaN(numYear) ||
-    isNaN(numMonth) ||
-    numYear > 2030 ||
-    numYear < 2021 ||
-    numMonth < 1 ||
-    numMonth > 12
-  ) {
+  // const filterData = router.query.slug
+
+  // if (!filterData) {
+  //   return <p className='center'>Loading...</p>
+  // }
+
+  // const filteredYear = filterData[0]
+  // const filteredMonth = filterData[1]
+
+  // const numYear = +filteredYear
+  // const numMonth = +filteredMonth
+  // console.log('numYear', numYear, numMonth, isNaN(numYear))
+  if (hasError) {
     return (
       <>
         <ErrorAlert>
@@ -41,10 +44,7 @@ const FilterEventsPage: NextPage = () => {
     )
   }
 
-  const filteredEvents = getFilteredEvents({
-    year: numYear,
-    month: numMonth,
-  })
+  const filteredEvents = events
 
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
@@ -59,14 +59,53 @@ const FilterEventsPage: NextPage = () => {
     )
   }
 
-  const date = new Date(numYear, numMonth - 1)
+  const selectDate = new Date(date.year, date.month - 1)
 
   return (
     <>
-      <ResultsTitle date={date} />
+      <ResultsTitle date={selectDate} />
       <EventList items={filteredEvents} />
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const filterData = context.query.slug as string[]
+
+  const filteredYear = filterData[0]
+  const filteredMonth = filterData[1]
+
+  const numYear = +filteredYear
+  const numMonth = +filteredMonth
+  if (
+    isNaN(numYear) ||
+    isNaN(numMonth) ||
+    numYear > 2030 ||
+    numYear < 2021 ||
+    numMonth < 1 ||
+    numMonth > 12
+  ) {
+    return {
+      props: {
+        hasError: true
+      },
+    }
+  }
+
+  const filteredEvents = await getFilteredEvents({
+    year: numYear,
+    month: numMonth,
+  })
+
+  return {
+    props: {
+      events: filteredEvents,
+      date: {
+        year: numYear,
+        month: numMonth
+      }
+    }
+  }
 }
 
 export default FilterEventsPage
