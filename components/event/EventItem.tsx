@@ -4,6 +4,7 @@ import Button from '../ui/Button'
 import ArrowRightIcon from '../icon/ArrowRight'
 import DateIcon from '../icon/Date'
 import LocationIcon from '../icon/Location'
+import Image from 'next/image'
 
 type Prop = {
   item: DataItemProp
@@ -26,7 +27,8 @@ function EventItem({ item }: Prop) {
 
   return (
     <li className={classes.item}>
-      <img src={`/${image}`} alt='' width='100%' height='10rem' />
+      <Image src={`/${image}`} alt='' width={250} height={160} />
+      {/* <img   /> */}
       <div className={classes.content}>
         <div className={classes.summary}>
           <h2>{title}</h2>

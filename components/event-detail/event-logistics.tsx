@@ -1,6 +1,7 @@
 import AddressIcon from '../icon/Location'
 import DateIcon from '../icon/Date'
 import LogisticsItem from './logistics-item'
+import Image from 'next/image'
 import classes from './event-logistics.module.css'
 
 type PropType = {
@@ -29,7 +30,8 @@ function EventLogistics({
   return (
     <section className={classes.logistics}>
       <div className={classes.image}>
-        <img src={`/${image}`} alt={imageAlt} />
+        {/* <img src={`/${image}`} alt={imageAlt} /> */}
+        <Image src={`/${image}`} alt={imageAlt} width={400} height={400} />
       </div>
       <ul className={classes.list}>
         <LogisticsItem icon={DateIcon}>

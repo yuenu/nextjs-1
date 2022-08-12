@@ -1,11 +1,15 @@
 import type { NextPage, GetStaticProps, GetStaticPaths } from 'next'
-import { getEventById, getFeaturedEvents } from '../../helpers/api-utils'
+import {
+  getEventById,
+  getFeaturedEvents,
+} from '../../helpers/api-utils'
 
 import EventSummary from '../../components/event-detail/event-summary'
 import EventLogistics from '../../components/event-detail/event-logistics'
 import EventContent from '../../components/event-detail/event-content'
 import ErrorAlert from '../../components/ui/ErrorAlert'
 import { ResponseItem } from '../../types'
+import Head from 'next/head'
 
 type Props = {
   selectedEvent: ResponseItem
@@ -24,6 +28,13 @@ const EventDetailPage: NextPage<Props> = ({ selectedEvent }) => {
 
   return (
     <>
+      <Head>
+        <title>{event.title}</title>
+        <meta
+          name="description"
+          content={event.description}
+        />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

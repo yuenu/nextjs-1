@@ -4,6 +4,7 @@ import { getAllEvents } from '../../helpers/api-utils'
 import EventList from '../../components/event/EventList'
 import EventSearch from '../../components/event/EventSearch'
 import {Response} from '../../types'
+import Head from 'next/head'
 
 type Props = {
   events: Response
@@ -20,10 +21,16 @@ const AllEventPage: NextPage<Props> = ({events}) => {
   }
 
   return (
+    <>
+    <Head>
+      <title>All Events</title>
+      <meta name="description" content="Find a lot of great events that allow you to evolve" />
+    </Head>
     <div>
       <EventSearch onSearch={onSearch} />
       <EventList items={events} />
     </div>
+    </>
   )
 }
 
